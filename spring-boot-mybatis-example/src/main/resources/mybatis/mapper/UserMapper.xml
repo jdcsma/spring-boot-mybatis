@@ -3,7 +3,40 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mybatis.mapper.UserMapper">
-    <insert id="save" parameterType="jun.example.spring.boot.mybatis.domain.User" useGeneratedKeys="true">
-        insert into tab_user(name,sex,age) values(#{name},#{sex},#{age})
+    <resultMap id="UserResultMap" type="AliasedUser">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="sex" column="sex"/>
+        <result property="age" column="age"/>
+    </resultMap>
+    <select id="findAll" resultMap="UserResultMap">
+        select * from tab_user
+    </select>
+    <select id="findOneWithMap" parameterType="string"
+            resultType="hashmap">
+        select * from tab_user where name=#{name}
+    </select>
+    <!-- same as
+        <select id="findOneWithObject" parameterType="string"
+            resultType="AliasedUser">
+    -->
+    <select id="findOneWithObject" parameterType="string"
+            resultMap="UserResultMap">
+        select * from tab_user where name=#{name}
+    </select>
+    <insert id="save" parameterType="AliasedUser" useGeneratedKeys="true"
+            keyProperty="id">
+        insert into tab_user (name,sex,age)
+        values (#{name},#{sex},#{age})
     </insert>
+    <update id="updateOne" parameterType="AliasedUser">
+        update tab_user set
+            name = #{name},
+            sex = #{sex},
+            age = #{age}
+        where name = #{name}
+    </update>
+    <delete id="deleteAll">
+        delete from tab_user;
+    </delete>
 </mapper>

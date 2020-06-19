@@ -11,6 +11,15 @@ public class User implements Serializable {
     private String sex;
     private int age;
 
+    public User() {}
+
+    public User(long id, String name, String sex, int age) {
+        this.id = id;
+        this.name = name;
+        this.sex = sex;
+        this.age = age;
+    }
+
     public User(String name, String sex, int age) {
         this.name = name;
         this.sex = sex;
@@ -58,4 +67,29 @@ public class User implements Serializable {
                 ", age=" + age +
                 '}';
     }
+
+    public static class Builder {
+
+        private final User user = new User();
+
+        public Builder withName(String name) {
+            this.user.setName(name);
+            return this;
+        }
+
+        public Builder withSex(String sex) {
+            this.user.setSex(sex);
+            return this;
+        }
+
+        public Builder withAge(int age) {
+            this.user.setAge(age);
+            return this;
+        }
+
+        public User getResult() {
+            return this.user;
+        }
+    }
+
 }

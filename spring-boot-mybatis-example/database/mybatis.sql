@@ -25,8 +25,8 @@ CREATE TABLE `tab_user` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(127) NOT NULL,
   `sex` char(2) NOT NULL,
-  `age` int(11) NOT NULL,
+  `age` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 SET FOREIGN_KEY_CHECKS = 1;
